@@ -15,7 +15,6 @@ services:
       - "5432:5432"
     volumes:
       - MO_data:/var/lib/postgresql/data/
-      - ./Resources/scripts/:/data/
     
   backend:
     depends_on:
