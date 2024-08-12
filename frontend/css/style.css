@@ -1,0 +1,23 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#map {
+    height: 40%;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+    background-color: #f0f0f0;
+}
+
+#butons-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
