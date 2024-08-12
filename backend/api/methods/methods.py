@@ -1,7 +1,9 @@
 from sqlalchemy.orm import Session
 from ..config.db import SessionLocal
-from ..models.models import Category, InterestPlace
+from ..models.models import Category, InterestPlace, place_categories
 from ..models.schemas import CategoryCreate, InterestPlaceCreate, InterestPlaceUpdate
+from sqlalchemy.ext.declarative import DeclarativeMeta
+import json
 
 # Category CRUD Operations
 
@@ -10,8 +12,17 @@ def get_category(db: Session, category_id: int):
 
 def get_categories(db: Session, skip: int = 0, limit: int = 10):
     if skip < 0:
-        return db.query(Category.name).all()
+        return db.query(Category).all()
     return db.query(Category).offset(skip).limit(limit).all()
+
+def get_interest_place_by_category(db: Session, category_id: int):
+    return (
+        db.query(InterestPlace)
+        .join(place_categories, InterestPlace.id == place_categories.c.place_id)
+        .join(Category, Category.id == place_categories.c.category_id)
+        .filter(Category.id == category_id)
+        .all()
+    )
 
 def create_category(db: Session, category: CategoryCreate):
     db_category = Category(name=category.name)

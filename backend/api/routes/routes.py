@@ -12,6 +12,7 @@ from ..methods import methods as repo
 from ..config.db import SessionLocal
 from typing import List
 import logging
+import json
 
 router = APIRouter()
 
@@ -41,10 +42,9 @@ def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
     db_category = repo.create_category(db=db, category=category)
     return db_category
 
-@router.get("/all_categories/", response_model=List[str], tags=["Categories"])
+@router.get("/all_categories/", response_model=List[Category], tags=["Categories"])
 def read_categories(db: Session = Depends(get_db)):
     categories = repo.get_categories(db=db, skip=-1)
-    categories = [category.name for category in categories]
     return categories
 
 @router.get("/categories/", response_model=List[Category], tags=["Categories"])
@@ -73,6 +73,12 @@ def delete_category(category_id: int, db: Session = Depends(get_db)):
 def create_interest_place(place: InterestPlaceCreate, db: Session = Depends(get_db)):
     db_place = repo.create_interest_place(db=db, place=place)
     return InterestPlaceResponse.from_orm(db_place)
+
+@router.get("/places_by_category{category_id}", response_model=List[InterestPlaceResponse], tags=["Interest Places"])
+def search_by_category(category_id: int, db: Session = Depends(get_db)):
+    db_places = repo.get_interest_place_by_category(db=db, category_id=category_id)
+    places = [InterestPlaceResponse.from_orm(place) for place in db_places]
+    return places
 
 @router.get("/places/", response_model=List[InterestPlaceResponse], tags=["Interest Places"])
 def read_interest_places(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):

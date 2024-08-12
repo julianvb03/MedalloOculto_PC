@@ -10,12 +10,16 @@
         <title id="t001">Medallo oculto</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/style.css">
 
         <!-- Leaftlet CSS -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin=""/>
+        <!-- Leaftlet CSS Routing -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+        <!-- Own CSS -->
+        <link rel="stylesheet" href="css/style.css">
+        
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -23,24 +27,30 @@
         <![endif]-->
         <div id="map"></div>
         <div id="butons-options">
-            <button id="b001" onclick=cosa()>Mostrar medallo</button>
-            <button id="b002" onclick=viewMarkers()>Mostrar markers</button>
+            <button id="b001">Limpiar Markers</button>
+            <button id="b002" onclick="viewMarkers()">Mostrar markers</button>
 
-            <select id="places" name="places">
-                <option value="1">Bar</option>
-                <option value="2">Restaurante</option>
-                <option value="3">Cultural</option>
+            <select id="b003-options" name="places">
+                <option value="1">Cultural</option>
+                <option value="2">Bar</option>
+                <option value="3">Restaurante</option>
+                <option value="4">Educativo</option>
+                <option value="5">Historico</option>
+                <option value="6">Comercial</option>
             </select>
         
-            <button onclick="mostrarSeleccion()">Mostrar selección</button>
+            <button id="b003">Mostrar selección</button>
         </div>
 
         
         
-        <script src="js/script.js" async defer></script>
         <!-- Leaftlet JS -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
+        <!-- Leaftlet JS Routing -->
+        <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+        <!-- Own JS -->
+        <script src="js/script.js" async defer></script>
     </body>
 </html>
